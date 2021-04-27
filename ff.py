@@ -159,12 +159,16 @@ def color_negative_red(val):
     return 'color: %s' % color
 summary_df = regression.summary_table()
 
+col_name = summary_df.columns.tolist()
+summary_df.insert(0,'Industry')
+summary_df.reindex(columns=col_name)
+
 sector_name = []
 for comp in ASSETS:
     sector = yf.Ticker(comp)
     sector = sector.info["sector"]
     sector_name.append(sector)
-summary_df = pd.concat([pd.DataFrame(sector_name, columns=['Industry']),summary_df], sort=False)
+summary_df['Industry'] = sector_name
     
 
  

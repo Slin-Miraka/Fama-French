@@ -163,13 +163,14 @@ col_name = summary_df.columns.tolist()
 summary_df.insert(0,'Industry')
 summary_df.reindex(columns=col_name)
 
+'''
 sector_name = []
 for comp in ASSETS:
     sector = yf.Ticker(comp)
     sector = sector.info["sector"]
     sector_name.append(sector)
 summary_df['Industry'] = pd.DataFrame(sector_name)
-    
+'''  
 
  
 summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])

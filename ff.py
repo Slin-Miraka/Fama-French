@@ -19,7 +19,7 @@ month_list = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oc
 
 st.title("Fama French 3 Factors Analysis")
 '''#### (stock prices from *yahoo finance*) '''
-st.write("**Current Stock List**", list(dict.fromkeys(ASSETS)))
+st.subheader("**Current Stock List**", list(dict.fromkeys(ASSETS)))
 
 START_DATE,END_DATE, start_year,start_month,end_year,end_month = get_date()# get variables
 
@@ -161,19 +161,19 @@ summary_df = regression.summary_table()
 summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])
 st.write("")
 st.write("")
-st.write("**Regression Summary Table**",summary_df)
+st.subheader("**Regression Summary Table**",summary_df)
 
 #
 st.write("")
 st.write("")
-st.write("**Regression Models**")
+st.subheader("**Regression Models**")
 for j in range(len(ASSETS),0,-1):
     st.write("**{}**".format(merge.columns[-j])+ " = " + " {:.4f} ".format(regression.alphas[-j+len(ASSETS)]) + "{0:+.4f} x **R_mkt**".format(regression.beta_1s[-j+len(ASSETS)])  + "  {0:+.4f} x **R_size**".format(regression.beta_2s[-j+len(ASSETS)])+ "  {0:+.4f} x **R_value**".format(regression.beta_3s[-j+len(ASSETS)]))
 st.write("")
 st.write("")
 st.write("")
 st.write("")
-st.write("**Detailed Regression Summary**")
+st.subheader("**Detailed Regression Summary**")
 
 ticker = st.selectbox("Choose a Ticker for detailed regression summary",ASSETS)
 tickerData = yf.Ticker(ticker)

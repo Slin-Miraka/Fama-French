@@ -172,7 +172,7 @@ summary_df = regression.summary_table()
 #    return industry
 #industry = Summary_table()
 
-summary_df = pd.merge(industry,summary_df,left_index=True, right_index=True)
+#summary_df = pd.merge(industry,summary_df,left_index=True, right_index=True)
 
 
 

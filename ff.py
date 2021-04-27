@@ -161,7 +161,8 @@ summary_df = regression.summary_table()
 summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])
 st.write("")
 st.write("")
-st.subheader("**Regression Summary Table**",summary_df)
+st.subheader("**Regression Summary Table**")
+st.write(summary_df)
 
 #
 st.write("")

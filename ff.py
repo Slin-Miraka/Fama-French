@@ -8,6 +8,17 @@ import yfinance as yf
 from imputs import  get_date,get_list
 import plotly.graph_objects as go
 
+st.markdown(
+    """
+<style>
+.sidebar .sidebar-content {
+    background-image: linear-gradient(#2e7bcf,#2e7bcf);
+    color: white;
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
 
 
 

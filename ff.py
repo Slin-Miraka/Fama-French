@@ -142,6 +142,7 @@ if price_checkbox:
     fig.update_xaxes(title_text="Date")
     fig.update_yaxes(title_text="Stock Price")
     st.plotly_chart(fig)
+    st.write("Data starting date",START_DATE,"Data ending date",END_DATE)
 
 if data_checkbox:
     st.write(merge)

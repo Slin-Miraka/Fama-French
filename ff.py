@@ -158,6 +158,15 @@ def color_negative_red(val):
     color = 'red' if val < 0 else 'black'
     return 'color: %s' % color
 summary_df = regression.summary_table()
+
+sector_name = []
+for comp in ASSETS:
+    sector = yf.Ticker(comp)
+    sector = sector.info["sector"]
+    sector_name.append(sector)
+summary_df = pd.concat([pd.DataFrame(sector_name, columns=['Industry']),summary_df], sort=False)
+    
+
  
 summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])
 st.write("")

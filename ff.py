@@ -3,7 +3,6 @@ import datetime as dt
 import statsmodels.api as sm
 import streamlit as st
 import numpy as np
-import calendar
 from datetime import timedelta
 import yfinance as yf
 from imputs import  get_date,get_list

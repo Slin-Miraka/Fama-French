@@ -146,7 +146,7 @@ if price_checkbox:
 
 if data_checkbox:
     st.write(merge)
-    st.write("Shape of data", merge.shape())
+    st.write("Shape of data", merge.shape)
 st.write("**Regression Summary Table**",regression.summary_table())
 
 #

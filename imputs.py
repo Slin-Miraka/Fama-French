@@ -15,11 +15,11 @@ list_ = ['AAPL', 'XOM','GE','GS']
 def get_list():
     st.sidebar.header('Welcome！ o(*￣▽￣*)ブ')
     symbol = st.sidebar.text_input("Input Tickers")
-    st.sidebar.write("You can add **US** Tickers to the portfolio")
-    st.sidebar.write("eg. Input **'MCD'** for US tickers")
+    st.sidebar.write("You can add **US** Tickers to the list.")
+    st.sidebar.write("eg. Input **'MCD'** for US tickers.")
     if st.sidebar.button("Add Tickers"):
         list_.append(symbol.upper())
-    drop = st.sidebar.selectbox("Drop a Ticker from the stock ",np.sort(list_))
+    drop = st.sidebar.selectbox("Drop a Ticker from the stock list.",np.sort(list_))
     if st.sidebar.button("Drop Tickers"):   
         list_.remove(drop)
     return list_

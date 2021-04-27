@@ -12,6 +12,7 @@ import plotly.graph_objects as go
 
 
 ASSETS = get_list()# get variables
+ASSETS = [x for x in ASSETS if x != '']
 ASSETS = list(dict.fromkeys(ASSETS))
 ASSETS.sort()
 month_list = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']

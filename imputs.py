@@ -19,7 +19,7 @@ def get_list():
     st.sidebar.write("eg. Input **'MCD'** for US tickers")
     if st.sidebar.button("Add Tickers"):
         list_.append(symbol.upper())
-    drop = st.sidebar.selectbox("Drop a Ticker from the current portfolio",np.sort(list_))
+    drop = st.sidebar.selectbox("Drop a Ticker from the stock ",np.sort(list_))
     if st.sidebar.button("Drop Tickers"):   
         list_.remove(drop)
     return list_

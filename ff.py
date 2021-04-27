@@ -165,9 +165,9 @@ for comp in ASSETS:
     sector = yf.Ticker(comp)
     sector = sector.info["sector"]
     sector_name.append(sector)
-summary_df['Industry'] = pd.DataFrame(sector_name)
+industry = pd.DataFrame(sector_name, index = ASSETS)
 
-
+st.write(industry)
  
 summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])
 st.write("")

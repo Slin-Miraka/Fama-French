@@ -3,7 +3,6 @@ import datetime as dt
 import statsmodels.api as sm
 import streamlit as st
 import numpy as np
-import calendar
 from datetime import timedelta
 import yfinance as yf
 from PIL import Image
@@ -27,6 +26,13 @@ def get_list():
         list_.remove(drop)
     return list_
 
+def last_day_of_month(any_day):
+    # this will never fail
+    # get close to the end of the month for any day, and add 4 days 'over'
+    next_month = any_day.replace(day=28) + dt.timedelta(days=4)
+    # subtract the number of remaining 'overage' days to get last day of current month, or said programattically said, the previous day of the first of next month
+    return next_month - dt.timedelta(days=next_month.day)
+
 month_list = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 def get_date():
     delta = timedelta(days=-1)
@@ -40,9 +46,9 @@ def get_date():
         end_year = st.selectbox('Selecting the End Year', range(1990, 2022), index = 30)
     with col4:
         end_month = st.selectbox('Month', month_list, index = 1)
-    last_day_of_month = calendar.monthrange(end_year,month_list.index(end_month)+1)[1]
+    
     start_date = dt.date(start_year,month_list.index(start_month)+1,1) 
-    end_date = dt.date(end_year,month_list.index(end_month)+1,last_day_of_month)
+    end_date = last_day_of_month(dt.date(end_year, month_list.index(end_month)+1, 1))
     if start_date < end_date:
         st.success('Start Month: `%s` `%s`\n\nEnd Month:`%s` `%s`' % (start_year, start_month,end_year, end_month))
     else:

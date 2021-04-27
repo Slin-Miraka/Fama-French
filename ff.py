@@ -134,11 +134,10 @@ price_checkbox = st.checkbox('Check the adjusted close price plot')
 data_checkbox = st.checkbox('Check the merged data (monthly data)')
 if price_checkbox:
     fig = go.Figure()
-    for idx, col_name in enumerate(df):
-        fig.add_trace(go.Scatter(x=df.index, y=df.iloc[:,idx]
-                    ,name=df.columns[idx]
-                    
-                    ))
+    fig.add_trace(go.Scatter(x=df.index, y=df
+                ,name=df.columns
+
+                ))
     fig.update_layout(height=500, width=800, title_text="Adj-close price")
     fig.update_xaxes(title_text="Date")
     fig.update_yaxes(title_text="Stock Price")

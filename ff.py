@@ -165,7 +165,7 @@ for comp in ASSETS:
     sector = yf.Ticker(comp)
     sector = sector.info["sector"]
     sector_name.append(sector)
-industry = pd.DataFrame(sector_name, index = ASSETS)
+industry = pd.DataFrame(sector_name, index = summary_df.index)
 
 summary_df = pd.merge(industry,summary_df,left_index=True, right_index=True)
  

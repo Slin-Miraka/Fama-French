@@ -19,7 +19,8 @@ month_list = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oc
 
 st.title("Fama French 3 Factors Analysis")
 '''#### (stock prices from *yahoo finance*) '''
-st.write("**Current Stock List**", list(dict.fromkeys(ASSETS)))
+st.subheader("**Current Stock List**")
+st.write(list(dict.fromkeys(ASSETS)))
 
 START_DATE,END_DATE, start_year,start_month,end_year,end_month = get_date()# get variables
 

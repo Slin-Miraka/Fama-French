@@ -163,7 +163,7 @@ st.write("")
 st.write("**check out this for the codes in this app** [link](https://github.com/Slin-Miraka/Fama-French/edit/main/ff.py)")
 st.write("**check out this for Mean-Variance Framework app** [link](https://share.streamlit.io/slin-miraka/efficient-frontier-app/main/MVF.py)")
 email = "slin3137@uni.sydney.edu.au"
-st.write("**My E-mail**", email)
+st.write("**My E-mail**: ", email)
 
 
 #Y = merge.iloc[:,-(len(ASSETS)-index)]

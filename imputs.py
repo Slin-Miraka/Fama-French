@@ -14,6 +14,7 @@ list_ = ['AAPL', 'XOM','GE','GS']
 
 def get_list():
     st.sidebar.header('Welcome！ o(*￣▽￣*)ブ')
+    st.sidebar.image("imageforapp2.jpg")
     symbol = st.sidebar.text_input("Input Tickers")
     st.sidebar.write("You can add **US** Tickers to the list.")
     st.sidebar.write("eg. Input **'MCD'** for US tickers.")

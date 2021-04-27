@@ -147,17 +147,42 @@ if price_checkbox:
 if data_checkbox:
     st.write(merge)
     st.write("Shape of data: ", merge.shape)
-st.write("**Regression Summary Table**",regression.summary_table())
+    
+def color_negative_red(val):
+    """
+    Takes a scalar and returns a string with
+    the css property `'color: red'` for negative
+    strings, black otherwise.
+    """
+    color = 'red' if val < 0 else 'black'
+    return 'color: %s' % color
+summary_df = regression.summary_table()
+ 
+summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])
+st.write("**Regression Summary Table**",summary_df)
 
 #
 st.write("**Regression Models**")
 for j in range(len(ASSETS),0,-1):
     st.write("**{}**".format(merge.columns[-j])+ " = " + " {:.4f} ".format(regression.alphas[-j+len(ASSETS)]) + "{0:+.4f} x **R_mkt**".format(regression.beta_1s[-j+len(ASSETS)])  + "  {0:+.4f} x **R_size**".format(regression.beta_2s[-j+len(ASSETS)])+ "  {0:+.4f} x **R_value**".format(regression.beta_3s[-j+len(ASSETS)]))
     
-#st.write("**Detailed Regression Summary**")
+st.write("**Detailed Regression Summary**")
 
-#ticker = st.selectbox("Choose a Ticker for detailed regression summary",ASSETS)
-#index = ASSETS.index(ticker)
+ticker = st.selectbox("Choose a Ticker for detailed regression summary",ASSETS)
+index = ASSETS.index(ticker)
+Y = merge.iloc[:,-(len(ASSETS)-index)]
+XX = sm.add_constant(X)
+model = sm.OLS(Y, XX)
+results = model.fit()
+
+results_summary1 = results.summary2().tables[0]
+results_summary2 = results.summary2().tables[1]
+results_summary3 = results.summary2().tables[2]
+
+st.write(results_summary1)
+st.write(results_summary2)
+st.write(results_summary3)
+
 st.write("")
 st.write("")
 st.write("**check out this for the codes in this app** [link](https://github.com/Slin-Miraka/Fama-French/)")

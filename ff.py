@@ -160,20 +160,20 @@ def color_negative_red(val):
 summary_df = regression.summary_table()
 
 #for efficiency consideration, close out it.
-'''
-@st.cache
-def Summary_table():
-    sector_name = []
-    for comp in ASSETS:
-        sector = yf.Ticker(comp)
-        sector = sector.info["sector"]
-        sector_name.append(sector)
-    industry = pd.DataFrame({"Industry": sector_name}, index = summary_df.index)
-    return industry
-industry = Summary_table()
+
+#@st.cache
+#def Summary_table():
+#    sector_name = []
+#    for comp in ASSETS:
+#      sector = yf.Ticker(comp)
+#      sector = sector.info["sector"]
+#       sector_name.append(sector)
+#    industry = pd.DataFrame({"Industry": sector_name}, index = summary_df.index)
+#    return industry
+#industry = Summary_table()
 
 summary_df = pd.merge(industry,summary_df,left_index=True, right_index=True)
-'''
+
 
 
 summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])

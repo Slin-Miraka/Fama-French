@@ -159,6 +159,8 @@ def color_negative_red(val):
     return 'color: %s' % color
 summary_df = regression.summary_table()
 
+#for efficiency consideration, close out it.
+'''
 @st.cache
 def Summary_table():
     sector_name = []
@@ -171,7 +173,9 @@ def Summary_table():
 industry = Summary_table()
 
 summary_df = pd.merge(industry,summary_df,left_index=True, right_index=True)
- 
+'''
+
+
 summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])
 st.write("")
 st.write("")

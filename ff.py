@@ -194,12 +194,16 @@ model = sm.OLS(Y, XX)
 results = model.fit()
 
 results_summary1 = results.summary2().tables[0]
+results_summary1 = results_summary1.assign(hack='').set_index('hack')
+results_summary1.rename(columns={'1':'','2':'','3':'','4':''})
 results_summary2 = results.summary2().tables[1]
 results_summary3 = results.summary2().tables[2]
+results_summary3 = results_summary3.assign(hack='').set_index('hack')
+results_summary3.rename(columns={'1':'','2':'','3':'','4':''})
 
-st.table(results_summary1.assign(hack='').set_index('hack'))
+st.table(results_summary1)
 st.table(results_summary2)
-st.table(results_summary3.assign(hack='').set_index('hack'))
+st.table(results_summary3)
 
 st.write("")
 st.write("")

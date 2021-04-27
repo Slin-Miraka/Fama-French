@@ -159,9 +159,13 @@ def color_negative_red(val):
 summary_df = regression.summary_table()
  
 summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])
+st.write("")
+st.write("")
 st.write("**Regression Summary Table**",summary_df)
 
 #
+st.write("")
+st.write("")
 st.write("**Regression Models**")
 for j in range(len(ASSETS),0,-1):
     st.write("**{}**".format(merge.columns[-j])+ " = " + " {:.4f} ".format(regression.alphas[-j+len(ASSETS)]) + "{0:+.4f} x **R_mkt**".format(regression.beta_1s[-j+len(ASSETS)])  + "  {0:+.4f} x **R_size**".format(regression.beta_2s[-j+len(ASSETS)])+ "  {0:+.4f} x **R_value**".format(regression.beta_3s[-j+len(ASSETS)]))

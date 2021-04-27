@@ -5,7 +5,7 @@ import streamlit as st
 import numpy as np
 from datetime import timedelta
 import yfinance as yf
-#from PIL import Image
+
 
 
 
@@ -14,9 +14,6 @@ list_ = ['AAPL', 'XOM','GE','GS']
 
 def get_list():
     st.sidebar.header('Welcome！ o(*￣▽￣*)ブ')
-    #image = Image.open('imageforapp2.jpg')
-    #st.sidebar.image(image, caption='',
-                     #use_column_width=True)
     symbol = st.sidebar.text_input("Input Tickers")
     st.sidebar.write("You can add **US** Tickers to the portfolio")
     st.sidebar.write("eg. Input **'MCD'** for US tickers")

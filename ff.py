@@ -186,9 +186,9 @@ results_summary1 = results.summary2().tables[0]
 results_summary2 = results.summary2().tables[1]
 results_summary3 = results.summary2().tables[2]
 
-st.write(results_summary1)
-st.write(results_summary2)
-st.write(results_summary3)
+st.table(results_summary1)
+st.table(results_summary2)
+st.table(results_summary3)
 
 st.write("")
 st.write("")

@@ -176,6 +176,15 @@ st.write("")
 st.write("**Detailed Regression Summary**")
 
 ticker = st.selectbox("Choose a Ticker for detailed regression summary",ASSETS)
+tickerData = yf.Ticker(ticker)
+#logo
+string_logo = '<img src=%s>' % tickerData.info['logo_url']
+st.markdown(string_logo, unsafe_allow_html=True)
+#
+string_name = tickerData.info["sector"]
+st.header('**%s**' % string_name)
+
+
 index = ASSETS.index(ticker)
 Y = merge.iloc[:,-(len(ASSETS)-index)]
 XX = sm.add_constant(X)

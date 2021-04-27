@@ -201,7 +201,8 @@ results_summary1 = results_summary1[1:]
 results_summary2 = results.summary2().tables[1]
 results_summary3 = results.summary2().tables[2]
 results_summary3 = results_summary3.assign(hack='').set_index('hack')
-results_summary3.rename(columns={'1':'','2':'','3':'','4':''})
+results_summary3.columns = results_summary3.iloc[0]
+results_summary3 = results_summary3[1:]
 
 st.table(results_summary1)
 st.table(results_summary2)

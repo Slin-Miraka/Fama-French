@@ -152,18 +152,18 @@ st.write("**Regression Models**")
 for j in range(len(ASSETS),0,-1):
     st.write("**{}**".format(merge.columns[-j])+ " = " + " {:.4f} ".format(regression.alphas[-j+len(ASSETS)]) + "{0:+.4f} x **R_mkt**".format(regression.beta_1s[-j+len(ASSETS)])  + "  {0:+.4f} x **R_size**".format(regression.beta_2s[-j+len(ASSETS)])+ "  {0:+.4f} x **R_value**".format(regression.beta_3s[-j+len(ASSETS)]))
     
-st.write("**Detailed Regression Summary**")
+#st.write("**Detailed Regression Summary**")
 
-ticker = st.selectbox("Choose a Ticker for detailed regression summary",ASSETS)
-index = ASSETS.index(ticker)
+#ticker = st.selectbox("Choose a Ticker for detailed regression summary",ASSETS)
+#index = ASSETS.index(ticker)
 
 
-Y = merge.iloc[:,-(len(ASSETS)-index)]
-XX = sm.add_constant(X)
-model = sm.OLS(Y, XX)
-results = model.fit()
+#Y = merge.iloc[:,-(len(ASSETS)-index)]
+#XX = sm.add_constant(X)
+#model = sm.OLS(Y, XX)
+#results = model.fit()
 
-st.table(results.summary())
+#st.table(results.summary())
 
 
 

@@ -191,7 +191,7 @@ st.write("")
 st.write("")
 st.subheader("**Regression Models**")
 for j in range(len(ASSETS),0,-1):
-    st.write("**{}**".format(merge.columns[-j])+ " = " + " {:.4f} ".format(regression.alphas[-j+len(ASSETS)]) + "{0:+.4f} x **R_mkt**".format(regression.beta_1s[-j+len(ASSETS)])  + "  {0:+.4f} x **R_size**".format(regression.beta_2s[-j+len(ASSETS)])+ "  {0:+.4f} x **R_value**".format(regression.beta_3s[-j+len(ASSETS)]))
+    st.write("**{}**".format(merge.columns[-j])+ " = " + " {:.4f} ".format(regression.alphas[-j+len(ASSETS)]) + "{0:+.4f} x **MKT**".format(regression.beta_1s[-j+len(ASSETS)])  + "  {0:+.4f} x **SMB**".format(regression.beta_2s[-j+len(ASSETS)])+ "  {0:+.4f} x **HML**".format(regression.beta_3s[-j+len(ASSETS)]) + "+ ε")
 st.write("")
 st.write("")
 st.write("")

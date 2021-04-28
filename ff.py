@@ -112,23 +112,23 @@ class Thereefactor_regression():
                             },index = self.y.columns)
         return table
 ######
-def siginificance(x):
+def siginificance(x,sig_level = 0.05):
     c1 = 'background-color: yellow'
     c2 = '' 
     #compare columns
-    alpha_mask = x['α pvalues'] < 0.05
+    alpha_mask = x['α pvalues'] < sig_level
     #DataFrame with same index and columns names as original filled empty strings
     df1 =  pd.DataFrame(c2, index=x.index, columns=x.columns)
     #modify values of df1 column by boolean mask
     df1.loc[alpha_mask, 'α'] = c1
     
-    beta_1_mask = x['β1 pvalues'] < 0.05
+    beta_1_mask = x['β1 pvalues'] < sig_level
     df1.loc[beta_1_mask, 'β1'] = c1
     
-    beta_2_mask = x['β2 pvalues'] < 0.05
+    beta_2_mask = x['β2 pvalues'] < sig_level
     df1.loc[beta_2_mask, 'β2'] = c1
     
-    beta_3_mask = x['β3 pvalues'] < 0.05
+    beta_3_mask = x['β3 pvalues'] < sig_level
     df1.loc[beta_3_mask, 'β3'] = c1
     return df1
 def negative_red(val):
@@ -204,15 +204,16 @@ summary_df = regression.summary_table()
 
 
 
-summary_df = summary_df.style.apply(siginificance, axis=None).applymap(negative_red,subset=['α',"β1","β2","β3"]).hide_columns(['α pvalues','β1 pvalues','β2 pvalues','β3 pvalues'])
+
 st.write("")
 st.write("")
 st.subheader("**Regression Summary Table**")
 sig = st.select_slider('Slide to select the significance level', options=['0.01','0.05','0.1'])
+summary_df = summary_df.style.apply(siginificance,sig_level = float(sig), axis=None).applymap(negative_red,subset=['α',"β1","β2","β3"]).hide_columns(['α pvalues','β1 pvalues','β2 pvalues','β3 pvalues'])
 st.write(summary_df)
 
 #
-st.write("The cells highlight in yellow are significance in 0.05 significance level.")
+st.write("The cells highlight in yellow are significance in {} significance level.".format(sig))
 st.write("")
 st.subheader("**Regression Models**")
 for j in range(len(ASSETS),0,-1):

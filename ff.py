@@ -7,7 +7,6 @@ from datetime import timedelta
 import yfinance as yf
 from imputs import  get_date,get_list
 import plotly.graph_objects as go
-from korr import pearson, corrgram
 import seaborn as sns
 
 st.markdown(

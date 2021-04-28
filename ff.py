@@ -58,6 +58,7 @@ class Thereefactor_regression():
         self.conf_ints = []
         self.mses = []
         self.resids = []
+        self.pvalues = []
         X = sm.add_constant(X)
         for ind, col in enumerate(y.columns):
             a = y.iloc[:,ind]
@@ -65,11 +66,13 @@ class Thereefactor_regression():
             results = model.fit()
             alpha, beta_1, beta_2, beta_3 = results.params
             t = results.tvalues
+            p = results.pvalues
             r2_adj = results.rsquared_adj
             r2 = results.rsquared
             mse = results.mse_resid
             conf_int = results.conf_int()
             resid = results.resid
+            self.pvalues.append(p)
             self.alphas.append(alpha)
             self.beta_1s.append(beta_1)
             self.beta_2s.append(beta_2)
@@ -84,26 +87,54 @@ class Thereefactor_regression():
         self.beta_1_CI = [(self.conf_ints[i].round(decimals=5).iloc[1,:][0],self.conf_ints[i].round(decimals=5).iloc[1,:][1]) for i in range(len(y.columns))]
         self.beta_2_CI = [(self.conf_ints[i].round(decimals=5).iloc[2,:][0],self.conf_ints[i].round(decimals=5).iloc[2,:][1]) for i in range(len(y.columns))]
         self.beta_3_CI = [(self.conf_ints[i].round(decimals=5).iloc[3,:][0],self.conf_ints[i].round(decimals=5).iloc[3,:][1]) for i in range(len(y.columns))]
-        #self.alpha_stats = [self.ts[i][0] for i in range(len(y.columns))]
-        #self.beta_stats = [self.ts[i][1] for i in range(len(y.columns))]
+        self.alpha_pvalues = [self.pvalues[i][0] for i in range(len(y.columns))]
+        self.beta_1_pvalues = [self.pvalues[i][1] for i in range(len(y.columns))]
+        self.beta_2_pvalues = [self.pvalues[i][2] for i in range(len(y.columns))]
+        self.beta_3_pvalues = [self.pvalues[i][3] for i in range(len(y.columns))]
         self.resids = pd.DataFrame(self.resids,index = y.columns).T #creat a residual dataframe
         self.sd_resid = (self.resids - self.resids.mean())/self.resids.std() #calculating the standize residual
     def summary_table(self):
         table = pd.DataFrame({"α":self.alphas
                             ,"95% CI for α":self.alpha_CI
+                            ,"α pvalues":self.alpha_pvalues
                             ,"β1":self.beta_1s
                             ,"95% CI for β1":self.beta_1_CI
+                            ,"β1 pvalues":self.beta_1_pvalues
                             ,"β2":self.beta_2s
                             ,"95% CI for β2":self.beta_2_CI
-                            ,"β3":self.beta_3s
+                            ,"β2 pvalues":self.beta_2_pvalues
+                            ,"β3":self.beta_1s
                             ,"95% CI for β3":self.beta_3_CI
+                            ,"β3 pvalues":self.beta_3_pvalues
                             ,"R2": self.r2s
                             ,"R2_adj":self.r2_adjs
                             ,"SER":np.sqrt(self.mses)
                             },index = self.y.columns)
         return table
-
-
+######
+def siginificance(x):
+    c1 = 'background-color: yellow'
+    c2 = '' 
+    #compare columns
+    alpha_mask = x['α pvalues'] < 0.05
+    #DataFrame with same index and columns names as original filled empty strings
+    df1 =  pd.DataFrame(c2, index=x.index, columns=x.columns)
+    #modify values of df1 column by boolean mask
+    df1.loc[alpha_mask, 'α'] = c1
+    
+    beta_1_mask = x['β1 pvalues'] < 0.05
+    df1.loc[beta_1_mask, 'β1'] = c1
+    
+    beta_2_mask = x['β2 pvalues'] < 0.05
+    df1.loc[beta_2_mask, 'β2'] = c1
+    
+    beta_3_mask = x['β3 pvalues'] < 0.05
+    df1.loc[beta_3_mask, 'β3'] = c1
+    return df1
+def negative_red(val):
+    color = 'red' if val < 0 else 'green'
+    return 'color: %s' % color
+######
 
 
 rtn = get_rtn()
@@ -153,14 +184,7 @@ if data_checkbox:
     st.write(merge)
     st.write("Shape of data: ", merge.shape)
     
-def color_negative_red(val):
-    """
-    Takes a scalar and returns a string with
-    the css property `'color: red'` for negative
-    strings, black otherwise.
-    """
-    color = 'red' if val < 0 else 'black'
-    return 'color: %s' % color
+
 summary_df = regression.summary_table()
 
 #for efficiency consideration, close out it.
@@ -180,7 +204,7 @@ summary_df = regression.summary_table()
 
 
 
-summary_df = summary_df.style.applymap(color_negative_red,subset=pd.IndexSlice[:, ['α', 'β1', 'β2', 'β3']])
+summary_df = summary_df.style.apply(siginificance, axis=None).applymap(negative_red,subset=['α',"β1","β2","β3"]).hide_columns(['α pvalues','β1 pvalues','β2 pvalues','β3 pvalues'])
 st.write("")
 st.write("")
 st.subheader("**Regression Summary Table**")

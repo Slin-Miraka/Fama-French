@@ -1,7 +1,7 @@
-streamlit==0.78.0
-yfinance==0.1.55
-numpy==1.19.5
-plotly==4.14.3
+streamlit
+yfinance
+numpy
+plotly
 statsmodels
 datetime
 seaborn

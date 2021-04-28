@@ -9,7 +9,7 @@ from imputs import  get_date,get_list
 import plotly.graph_objects as go
 import seaborn as sns
 import matplotlib.pyplot as plt
-from korr improt pearson,corrgram
+from korr import pearson,corrgram
 
 st.markdown(
     """

@@ -238,7 +238,7 @@ try:
     st.subheader('**%s**' % string_name)
 except:
 	pass
-	continue
+	
 
 
 index = ASSETS.index(ticker)

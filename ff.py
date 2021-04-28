@@ -209,11 +209,11 @@ st.write("")
 st.write("")
 st.subheader("**Regression Summary Table**")
 sig = st.select_slider('Slide to select the significance level', options=['0.01','0.05','0.1'])
-summary_df = summary_df.style.apply(siginificance,sig_level = float(sig), axis=None).applymap(negative_red,subset=['α',"β1","β2","β3"]).hide_columns(['α pvalues','β1 pvalues','β2 pvalues','β3 pvalues'])
+summary_df = summary_df.style.apply(siginificance,sig_level = float(sig), axis=None).applymap(negative_red,subset=['α',"β1","β2","β3"])
 st.write(summary_df)
 
 #
-st.write("The cells highlight in yellow are significance in {} significance level.".format(sig))
+st.write("The cells highlight in yellow are significant in {} significance level.".format(sig))
 st.write("")
 st.subheader("**Regression Models**")
 for j in range(len(ASSETS),0,-1):

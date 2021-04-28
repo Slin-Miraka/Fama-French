@@ -8,6 +8,7 @@ import yfinance as yf
 from imputs import  get_date,get_list
 import plotly.graph_objects as go
 from korr import pearson, corrgram
+import seaborn as sns
 
 st.markdown(
     """
@@ -223,10 +224,16 @@ model = sm.OLS(Y, XX)
 results = model.fit()
 
 corre = pd.merge(Y,X,left_index=True, right_index=True)
+plt.figure(figsize=(16, 6))
+# Store heatmap object in a variable to easily access it when you want to include more features (such as title).
+# Set the range of values to be displayed on the colormap from -1 to 1, and set the annotation to True to display the correlation values on the heatmap.
+heatmap = sns.heatmap(corre.corr(), vmin=-1, vmax=1, annot=True)
+# Give a title to the heatmap. Pad defines the distance of the title from the top of the heatmap.
+heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
 #rho, pval = pearson(corre)
 #gram = corrgram(rho, pval, corre.columns, dpi=120)
-#st.plotly_chart(gram)
-st.write(corre.corr())
+st.plotly_chart(heatmap)
+
 ###
 results_summary1 = results.summary2().tables[0]
 results_summary1 = results_summary1.assign(hack='').set_index('hack')

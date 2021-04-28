@@ -208,10 +208,11 @@ summary_df = summary_df.style.apply(siginificance, axis=None).applymap(negative_
 st.write("")
 st.write("")
 st.subheader("**Regression Summary Table**")
+sig = st.select_slider('Slide to select the significance level', options=['0.01','0.05','0.1'])
 st.write(summary_df)
 
 #
-st.write("")
+st.write("The cells highlight in yellow are significance in 0.05 significance level.")
 st.write("")
 st.subheader("**Regression Models**")
 for j in range(len(ASSETS),0,-1):

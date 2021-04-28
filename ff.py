@@ -9,19 +9,9 @@ from imputs import  get_date,get_list
 import plotly.graph_objects as go
 import seaborn as sns
 import matplotlib.pyplot as plt
-from korr import pearson,corrgram
 
-st.markdown(
-    """
-<style>
-.sidebar .sidebar-content {
-    background-image: linear-gradient(#2e7bcf,#2e7bcf);
-    color: red;
-}
-</style>
-""",
-    unsafe_allow_html=True,
-)
+
+
 
 
 

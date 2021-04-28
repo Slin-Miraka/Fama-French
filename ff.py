@@ -103,7 +103,7 @@ class Thereefactor_regression():
                             ,"β2":self.beta_2s
                             ,"95% CI for β2":self.beta_2_CI
                             ,"β2 pvalues":self.beta_2_pvalues
-                            ,"β3":self.beta_1s
+                            ,"β3":self.beta_3s
                             ,"95% CI for β3":self.beta_3_CI
                             ,"β3 pvalues":self.beta_3_pvalues
                             ,"R2": self.r2s

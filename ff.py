@@ -7,6 +7,7 @@ from datetime import timedelta
 import yfinance as yf
 from imputs import  get_date,get_list
 import plotly.graph_objects as go
+from korr import pearson, corrgram
 
 st.markdown(
     """
@@ -220,6 +221,12 @@ Y = merge.iloc[:,-(len(ASSETS)-index)]
 XX = sm.add_constant(X)
 model = sm.OLS(Y, XX)
 results = model.fit()
+
+corre = pd.merge(Y,X,left_index=True, right_index=True)
+rho, pval = pearson(corre)
+gram = corrgram(rho, pval, corre.columns, dpi=120)
+st.plotly_chart(gram)
+
 ###
 results_summary1 = results.summary2().tables[0]
 results_summary1 = results_summary1.assign(hack='').set_index('hack')

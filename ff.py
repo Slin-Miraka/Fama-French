@@ -228,7 +228,7 @@ corre = pd.merge(Y,X,left_index=True, right_index=True)
 fig = plt.figure(figsize=(13, 6))
 # Store heatmap object in a variable to easily access it when you want to include more features (such as title).
 # Set the range of values to be displayed on the colormap from -1 to 1, and set the annotation to True to display the correlation values on the heatmap.
-heatmap = sns.heatmap(corre.corr(), vmin=-1, vmax=1, annot=True,annot_kws={"size": 16})
+heatmap = sns.heatmap(corre.corr(), vmin=-1, vmax=1, annot=True,annot_kws={"size": 14})
 # Give a title to the heatmap. Pad defines the distance of the title from the top of the heatmap.
 heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':16}, pad=12)
 #rho, pval = pearson(corre)

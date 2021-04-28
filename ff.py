@@ -223,10 +223,10 @@ model = sm.OLS(Y, XX)
 results = model.fit()
 
 corre = pd.merge(Y,X,left_index=True, right_index=True)
-rho, pval = pearson(corre)
-gram = corrgram(rho, pval, corre.columns, dpi=120)
-st.plotly_chart(gram)
-
+#rho, pval = pearson(corre)
+#gram = corrgram(rho, pval, corre.columns, dpi=120)
+#st.plotly_chart(gram)
+st.write(corre.corr())
 ###
 results_summary1 = results.summary2().tables[0]
 results_summary1 = results_summary1.assign(hack='').set_index('hack')

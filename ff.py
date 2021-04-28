@@ -232,7 +232,7 @@ heatmap = sns.heatmap(corre.corr(), vmin=-1, vmax=1, annot=True)
 heatmap.set_title('Correlation Heatmap', fontdict={'fontsize':12}, pad=12)
 #rho, pval = pearson(corre)
 #gram = corrgram(rho, pval, corre.columns, dpi=120)
-st.plotly_chart(heatmap)
+st.pyplot(fig)
 
 ###
 results_summary1 = results.summary2().tables[0]

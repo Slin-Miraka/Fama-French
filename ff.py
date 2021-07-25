@@ -209,7 +209,7 @@ st.write("")
 st.write("")
 st.subheader("**Regression Summary Table**")
 sig = st.select_slider('Slide to select the significance level', options=['0.01','0.05','0.1'])
-summary_df = summary_df.style.apply(siginificance,sig_level = float(sig), axis=None).applymap(negative_red,subset=['α',"β1","β2","β3"])
+#summary_df = summary_df.style.apply(siginificance,sig_level = float(sig), axis=None).applymap(negative_red,subset=['α',"β1","β2","β3"])
 st.write(summary_df)
 
 #
